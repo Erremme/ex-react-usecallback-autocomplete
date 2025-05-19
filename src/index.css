@@ -1,0 +1,38 @@
+.container{
+    margin: auto;
+    text-align: center;
+    padding: 40px;
+    background-color: antiquewhite;
+
+}
+
+.search-container{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    font-size: 26px;
+}
+
+.search-container input {
+    padding: 10px;
+}
+
+.card-container{
+    padding: 40px;
+}
+
+.card-container p {
+    font-size: 18px;
+}
+
+ul{ 
+    list-style: none;
+}
+
+.card-container img{
+    max-width: 150px;
+    height: 150px;
+    
+}
+
