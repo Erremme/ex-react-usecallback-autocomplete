@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
+import debounce from "lodash/debounce"
 
 function Card({brand , description, name , price , image} ) {
   return(
@@ -12,6 +13,8 @@ function Card({brand , description, name , price , image} ) {
   )
 }
 
+
+
 export default function App () {
   const [query , setQuery] = useState("")
   const [products , setProducts] = useState([])
@@ -19,20 +22,26 @@ export default function App () {
 
    const handleSearch = (query) => {
     if(query !== ""){
+      console.log("Sto facendo la chiamata")
       fetch(`http://localhost:5000/products?search=${query}`)
      .then((res) => res.json())
      .then((data) => setProducts(data))
      .catch((error) => console.error(error))
-    }else{
-      setProducts("")
-    }
     
+    }else{
+      setProducts([])
+    }
      
    }
+
+   const debouncedHandleSearch = useCallback(
+    debounce(handleSearch , 500),
+     []
+   )
    
     console.log(products)
    useEffect(() => {
-    handleSearch(query)
+    debouncedHandleSearch(query)
    },[query])
 
    
